@@ -48,6 +48,23 @@ export class LeaderListComponent implements OnInit {
     this.selectedRegion = region;
   }
 
+  // --- Statistics Helpers for Commit 6 ---
+  get totalLeaders(): number {
+    return this.leaders.length;
+  }
+
+  getKantoCount(): number {
+    return this.leaders.filter(l => l.region?.toLowerCase() === 'kanto').length;
+  }
+
+  getJohtoCount(): number {
+    return this.leaders.filter(l => l.region?.toLowerCase() === 'johto').length;
+  }
+
+  getHoennCount(): number {
+    return this.leaders.filter(l => l.region?.toLowerCase() === 'hoenn').length;
+  }
+
   get filteredLeaders(): GymLeader[] {
     return this.leaders.filter((l) => {
       const matchesRegion = this.selectedRegion === 'All' || l.region?.toLowerCase() === this.selectedRegion.toLowerCase();
