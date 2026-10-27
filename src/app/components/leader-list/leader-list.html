@@ -1,1 +1,55 @@
-<p>leader-list works!</p>
+<div class="banner-card">
+  <div class="banner-content">
+    <h1>Gym Leader Registry</h1>
+    <p>Manage and inspect registered regional gym leaders.</p>
+  </div>
+  <div class="banner-stripe">CATCH 'EM ALL !</div>
+</div>
+
+<section class="main-card">
+  <div class="card-header-bar">
+    <h2>Registered Leaders</h2>
+    <div class="filter-controls">
+      <button [class.active]="selectedRegion === 'All'" (click)="filterRegion('All')">ALL</button>
+      <button [class.active]="selectedRegion === 'Kanto'" (click)="filterRegion('Kanto')">KANTO</button>
+      <button [class.active]="selectedRegion === 'Johto'" (click)="filterRegion('Johto')">JOHTO</button>
+      <button [class.active]="selectedRegion === 'Hoenn'" (click)="filterRegion('Hoenn')">HOENN</button>
+    </div>
+  </div>
+
+  <div class="leaders-grid" *ngIf="filteredLeaders && filteredLeaders.length > 0; else noLeaders">
+    <div class="leader-item" *ngFor="let leader of filteredLeaders">
+      <div class="layer-item-top" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+        <h3 style="margin: 0;">{{ leader.name }}</h3>
+        <span class="badge-tag">{{ leader.region }}</span>
+      </div>
+      <div class="leader-details">
+        <div class="detail-row">
+          <span class="detail-label">TOWN</span>
+          <span class="detail-val">{{ leader.town }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">BADGE</span>
+          <span class="detail-val">{{ leader.badge }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">SPECIALTY</span>
+          <span class="detail-val">{{ leader.specialty }}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">ACE LEVEL</span>
+          <span class="detail-val">{{ leader.aceLevel }}</span>
+        </div>
+        <p class="motto" *ngIf="leader.motto">"{{ leader.motto }}"</p>
+      </div>
+      <div class="item-actions">
+        <a [routerLink]="['/leaders/edit', leader._id]" class="btn-edit">Edit</a>
+        <button (click)="deleteLeader(leader._id)" class="btn-delete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noLeaders>
+    <p class="empty-state">No gym leaders registered yet.</p>
+  </ng-template>
+</section>

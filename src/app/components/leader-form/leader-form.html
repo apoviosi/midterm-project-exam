@@ -1,1 +1,61 @@
-<p>leader-form works!</p>
+<div class="banner-card">
+  <div class="banner-content">
+    <h1>{{ isEditMode ? 'Edit Gym Leader' : 'Gym Leader Registration' }}</h1>
+    <p>Please specify the leader details below.</p>
+  </div>
+  <div class="banner-stripe">CATCH 'EM ALL !</div>
+</div>
+
+<div class="form-card">
+  <h2>Leader Data</h2>
+  
+  <form (ngSubmit)="onSubmit()" #leaderForm="ngForm">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>NAME</label>
+        <input type="text" [(ngModel)]="leader.name" name="name" required placeholder="e.g. Brock" />
+      </div>
+
+      <div class="form-group">
+        <label>REGION</label>
+        <select [(ngModel)]="leader.region" name="region" required>
+          <option value="Kanto">Kanto</option>
+          <option value="Johto">Johto</option>
+          <option value="Hoenn">Hoenn</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>TOWN</label>
+        <input type="text" [(ngModel)]="leader.town" name="town" required placeholder="e.g. Pewter City" />
+      </div>
+
+      <div class="form-group">
+        <label>BADGE</label>
+        <input type="text" [(ngModel)]="leader.badge" name="badge" required placeholder="e.g. Boulder Badge" />
+      </div>
+
+      <div class="form-group">
+        <label>SPECIALTY</label>
+        <input type="text" [(ngModel)]="leader.specialty" name="specialty" required placeholder="e.g. Rock" />
+      </div>
+
+      <div class="form-group">
+        <label>ACE LEVEL</label>
+        <input type="number" [(ngModel)]="leader.aceLevel" name="aceLevel" min="1" max="100" required />
+      </div>
+
+      <div class="form-group full-width">
+        <label>MOTTO</label>
+        <input type="text" [(ngModel)]="leader.motto" name="motto" placeholder="e.g. The Rock-Solid Pokémon Trainer!" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <a routerLink="/" class="btn-cancel">Cancel</a>
+      <button type="submit" class="btn-submit" [disabled]="!leaderForm.form.valid">
+        {{ isEditMode ? 'Update Leader' : 'Register Leader' }}
+      </button>
+    </div>
+  </form>
+</div>
