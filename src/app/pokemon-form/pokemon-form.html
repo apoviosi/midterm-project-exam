@@ -1,0 +1,71 @@
+<!-- Top Welcome Card (Dashed Border) -->
+<div class="theme-header-card">
+  <div class="theme-header-content">
+    <h2>{{ editingId() ? 'Edit Pokémon Details' : 'Pokémon Registration Form' }}</h2>
+    <p>Please specify the Pokémon details below.</p>
+  </div>
+  <div class="theme-header-footer">
+    CATCH 'EM ALL !
+  </div>
+</div>
+
+<!-- White Form Card -->
+<form [formGroup]="pokemonForm" (ngSubmit)="onSubmit()" class="theme-form-card">
+  <div class="form-body">
+    <div class="form-title">Pokémon Data</div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name" />
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input id="type" type="text" formControlName="type" />
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group">
+        <label for="level">Level</label>
+        <input id="level" type="number" min="1" formControlName="level" />
+      </div>
+      <div class="form-group">
+        <label for="nature">Nature</label>
+        <input id="nature" type="text" formControlName="nature" />
+      </div>
+    </div>
+  </div>
+  
+  <!-- Orange Footer Buttons -->
+  <div class="form-footer">
+    @if (editingId()) {
+      <button type="button" class="btn-prev" (click)="resetForm()">&larr; CANCEL</button>
+    }
+    <button type="submit" class="btn-next" [disabled]="pokemonForm.invalid">
+      {{ editingId() ? 'UPDATE POKÉMON' : 'ADD TO POKÉDEX' }} &rarr;
+    </button>
+  </div>
+</form>
+
+<!-- Saved List -->
+<div class="list-container">
+  <h3 class="list-title">Saved Pokémon</h3>
+  
+  @for (p of pokemonService.pokemonList(); track p._id) {
+    <div class="theme-form-card saved-card">
+      <div class="form-body">
+        <h4>{{ p.name }} (Lvl {{ p.level }})</h4>
+        <p>{{ p.type }} | {{ p.nature }}</p>
+      </div>
+      <div class="form-footer">
+        <button class="btn-prev" (click)="deletePokemon(p._id)">&larr; DELETE</button>
+        <button class="btn-next" (click)="editPokemon(p)">EDIT &rarr;</button>
+      </div>
+    </div>
+  } @empty {
+    <div class="theme-form-card empty-card">
+      <p>No Pokemon recorded yet.</p>
+    </div>
+  }
+</div>
