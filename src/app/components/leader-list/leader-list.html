@@ -9,18 +9,28 @@
 <section class="main-card">
   <div class="card-header-bar">
     <h2>Registered Leaders</h2>
-    <div class="filter-controls">
-      <button [class.active]="selectedRegion === 'All'" (click)="filterRegion('All')">ALL</button>
-      <button [class.active]="selectedRegion === 'Kanto'" (click)="filterRegion('Kanto')">KANTO</button>
-      <button [class.active]="selectedRegion === 'Johto'" (click)="filterRegion('Johto')">JOHTO</button>
-      <button [class.active]="selectedRegion === 'Hoenn'" (click)="filterRegion('Hoenn')">HOENN</button>
+    
+    <!-- Search and Filter Controls -->
+    <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+      <input 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        placeholder="Search name, town..." 
+        style="padding: 0.4rem 0.8rem; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.85rem; outline: none; background-color: #f8fafc;"
+      />
+      <div class="filter-controls">
+        <button [class.active]="selectedRegion === 'All'" (click)="filterRegion('All')">ALL</button>
+        <button [class.active]="selectedRegion === 'Kanto'" (click)="filterRegion('Kanto')">KANTO</button>
+        <button [class.active]="selectedRegion === 'Johto'" (click)="filterRegion('Johto')">JOHTO</button>
+        <button [class.active]="selectedRegion === 'Hoenn'" (click)="filterRegion('Hoenn')">HOENN</button>
+      </div>
     </div>
   </div>
 
-  <div class="leaders-grid" *ngIf="filteredLeaders && filteredLeaders.length > 0; else noLeaders">
+  <div class="leaders-grid" *ngIf="filteredLeaders.length > 0; else noLeaders">
     <div class="leader-item" *ngFor="let leader of filteredLeaders">
-      <div class="layer-item-top" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
-        <h3 style="margin: 0;">{{ leader.name }}</h3>
+      <div class="leader-item-top">
+        <h3>{{ leader.name }}</h3>
         <span class="badge-tag">{{ leader.region }}</span>
       </div>
       <div class="leader-details">
@@ -50,6 +60,6 @@
   </div>
 
   <ng-template #noLeaders>
-    <p class="empty-state">No gym leaders registered yet.</p>
+    <p class="empty-state">No gym leaders found matching your criteria.</p>
   </ng-template>
 </section>

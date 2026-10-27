@@ -9,42 +9,56 @@
 <div class="form-card">
   <h2>Leader Data</h2>
   
-  <form (ngSubmit)="onSubmit()" #leaderForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #leaderForm="ngForm" novalidate>
     <div class="form-grid">
+      
+      <!-- Name -->
       <div class="form-group">
         <label>NAME</label>
-        <input type="text" [(ngModel)]="leader.name" name="name" required placeholder="e.g. Brock" />
+        <input type="text" [(ngModel)]="leader.name" name="name" #name="ngModel" required placeholder="e.g. Brock" />
+        <small class="error-text" *ngIf="name.invalid && (name.dirty || name.touched)">Leader name is required.</small>
       </div>
 
+      <!-- Region -->
       <div class="form-group">
         <label>REGION</label>
-        <select [(ngModel)]="leader.region" name="region" required>
+        <select [(ngModel)]="leader.region" name="region" #region="ngModel" required>
           <option value="Kanto">Kanto</option>
           <option value="Johto">Johto</option>
           <option value="Hoenn">Hoenn</option>
         </select>
+        <small class="error-text" *ngIf="region.invalid && (region.dirty || region.touched)">Region selection is required.</small>
       </div>
 
+      <!-- Town -->
       <div class="form-group">
         <label>TOWN</label>
-        <input type="text" [(ngModel)]="leader.town" name="town" required placeholder="e.g. Pewter City" />
+        <input type="text" [(ngModel)]="leader.town" name="town" #town="ngModel" required placeholder="e.g. Pewter City" />
+        <small class="error-text" *ngIf="town.invalid && (town.dirty || town.touched)">Town is required.</small>
       </div>
 
+      <!-- Badge -->
       <div class="form-group">
         <label>BADGE</label>
-        <input type="text" [(ngModel)]="leader.badge" name="badge" required placeholder="e.g. Boulder Badge" />
+        <input type="text" [(ngModel)]="leader.badge" name="badge" #badge="ngModel" required placeholder="e.g. Boulder Badge" />
+        <small class="error-text" *ngIf="badge.invalid && (badge.dirty || badge.touched)">Badge name is required.</small>
       </div>
 
+      <!-- Specialty -->
       <div class="form-group">
         <label>SPECIALTY</label>
-        <input type="text" [(ngModel)]="leader.specialty" name="specialty" required placeholder="e.g. Rock" />
+        <input type="text" [(ngModel)]="leader.specialty" name="specialty" #specialty="ngModel" required placeholder="e.g. Rock" />
+        <small class="error-text" *ngIf="specialty.invalid && (specialty.dirty || specialty.touched)">Specialty type is required.</small>
       </div>
 
+      <!-- Ace Level -->
       <div class="form-group">
         <label>ACE LEVEL</label>
-        <input type="number" [(ngModel)]="leader.aceLevel" name="aceLevel" min="1" max="100" required />
+        <input type="number" [(ngModel)]="leader.aceLevel" name="aceLevel" #aceLevel="ngModel" min="1" max="100" required />
+        <small class="error-text" *ngIf="aceLevel.invalid && (aceLevel.dirty || aceLevel.touched)">Valid level between 1 and 100 is required.</small>
       </div>
 
+      <!-- Motto -->
       <div class="form-group full-width">
         <label>MOTTO</label>
         <input type="text" [(ngModel)]="leader.motto" name="motto" placeholder="e.g. The Rock-Solid Pokémon Trainer!" />

@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { GymLeaderService } from '../../services/gym-leader';
 import { GymLeader } from '../../models/gym-leader';
@@ -7,7 +8,7 @@ import { GymLeader } from '../../models/gym-leader';
 @Component({
   selector: 'app-leader-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './leader-list.html',
   styleUrl: './leader-list.css'
 })
@@ -16,6 +17,7 @@ export class LeaderListComponent implements OnInit {
   
   leaders: GymLeader[] = [];
   selectedRegion: string = 'All';
+  searchQuery: string = '';
 
   ngOnInit(): void {
     this.loadLeaders();
@@ -24,8 +26,7 @@ export class LeaderListComponent implements OnInit {
   loadLeaders(): void {
     this.leaderService.getLeaders().subscribe({
       next: (data) => {
-        // Create a new array reference to force Angular's change detection to pick up the update instantly
-        this.leaders = [...data];
+        this.leaders = data;
       },
       error: (err) => console.error(err)
     });
@@ -48,11 +49,15 @@ export class LeaderListComponent implements OnInit {
   }
 
   get filteredLeaders(): GymLeader[] {
-    if (this.selectedRegion === 'All') {
-      return this.leaders;
-    }
-    return this.leaders.filter(
-      (l) => l.region?.toLowerCase() === this.selectedRegion.toLowerCase()
-    );
+    return this.leaders.filter((l) => {
+      const matchesRegion = this.selectedRegion === 'All' || l.region?.toLowerCase() === this.selectedRegion.toLowerCase();
+      const query = this.searchQuery.toLowerCase().trim();
+      const matchesSearch = !query || 
+        l.name?.toLowerCase().includes(query) || 
+        l.town?.toLowerCase().includes(query) ||
+        l.specialty?.toLowerCase().includes(query);
+
+      return matchesRegion && matchesSearch;
+    });
   }
 }

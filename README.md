@@ -1,59 +1,31 @@
-# MidtermProjectExam
+# Gym Leader Registry - Midterm Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.3.
+A full-stack CRUD web application built with **Angular** (Frontend) and **Node.js / Express / MongoDB** (Backend) for managing regional Pokémon Gym Leaders.
 
-## Development server
+---
 
-To start a local development server, run:
+## Features
+- **View & Inspect**: Browse registered gym leaders dynamically categorized by regions (Kanto, Johto, Hoenn).
+- **Live Search**: Instant keyword filtering by leader name, town, or specialty type.
+- **Create & Edit**: Form management supporting data validation and submission handling via Angular template-driven forms (`ngForm`).
+- **Delete**: Record removal with confirmation alerts.
+- **Responsive Dark Theme**: Polished custom UI styling tailored for optimal readability.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tech Stack
+- **Frontend**: Angular (Standalone Components, Routing, HttpClient)
+- **Backend**: Node.js, Express
+- **Database**: MongoDB (Mongoose)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Setup & Installation Instructions
 
-```bash
-ng generate component component-name
-```
+### 1. Clone or Open the Repository
+Make sure you are in your project root directory.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 2. Run the Backend Server
+1. Navigate into the backend folder:
+   ```bash
+   cd backend

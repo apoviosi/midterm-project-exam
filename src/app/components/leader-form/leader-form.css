@@ -134,3 +134,10 @@
   background-color: #cbd5e1;
   cursor: not-allowed;
 }
+
+.error-text {
+  color: #e05638;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
